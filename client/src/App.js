@@ -5,10 +5,9 @@ import Logout from './components/Logout';
 import Leagues from './routes/Leagues';
 
 const App = function () {
-	const [user, setUser] = useState(
-		localStorage.getItem('user')
-		? localStorage.getItem('user')
-		: null);
+	const storedUser = JSON.parse(localStorage.getItem('user'))
+	const [user, setUser] = useState(storedUser ? storedUser: null)
+	
 	if(user){
 		return (
 			<>

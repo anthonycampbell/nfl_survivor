@@ -1,11 +1,22 @@
 import React from 'react';
+import axios from 'axios';
 import { GoogleLogin } from 'react-google-login';
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function Login(props){
     const onSuccess = (res) => {
-        localStorage.setItem('user', res.profileObj)
-        props.setUser(res.profileObj)
+        console.log('running')
+        axios.post('/api/users', {
+            token: res.tokenId
+        })
+        .then((res) => {
+            console.log(res.data.user)
+            localStorage.setItem('user', JSON.stringify(res.data.user));
+            props.setUser(res.data.user);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     };
 
     const onFailure = (res) => {
