@@ -5,13 +5,10 @@ import { GoogleLogin } from 'react-google-login';
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 function Login(props){
     const onSuccess = (res) => {
-        console.log('running')
         axios.post('/api/users', {
             token: res.tokenId
         })
         .then((res) => {
-            console.log(clientId)
-            console.log(res.data.user)
             localStorage.setItem('user', JSON.stringify(res.data.user));
             props.setUser(res.data.user);
         })

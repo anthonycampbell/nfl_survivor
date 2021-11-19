@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router()
 const User = require('../models/user');
 const { OAuth2Client } = require('google-auth-library');
-require('dotenv').config();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 router.get('/', (req, res) => {
     User.find()
@@ -13,7 +12,7 @@ router.post('/', async (req, res) => {
     const { token } = req.body;
     const ticket = await client.verifyIdToken({
       idToken: token,
-      audience: process.env.CLIENT_ID,
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
     const { email, given_name, family_name, name, sub } = ticket.getPayload();
     const userObject = {
