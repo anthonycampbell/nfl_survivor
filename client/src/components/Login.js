@@ -10,6 +10,7 @@ function Login(props){
             token: res.tokenId
         })
         .then((res) => {
+            console.log(clientId)
             console.log(res.data.user)
             localStorage.setItem('user', JSON.stringify(res.data.user));
             props.setUser(res.data.user);
