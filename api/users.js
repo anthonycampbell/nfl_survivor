@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router()
 const User = require('../models/user');
 const { OAuth2Client } = require('google-auth-library');
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 require('dotenv').config();
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 router.get('/', (req, res) => {
     User.find()
         .then(users => res.json(users))
